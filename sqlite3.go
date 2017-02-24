@@ -119,7 +119,7 @@ func (d sqlite3) setModelValue(value reflect.Value, field reflect.Value) error {
 			var err error
 			switch value.Elem().Kind() {
 			case reflect.String:
-				t, err = time.Parse("2006-01-02 15:04:05", value.Elem().String())
+				t, err = time.Parse("2006-01-02 15:04:05.999999999-07:00", value.Elem().String())
 				if err != nil {
 					return err
 				}
@@ -128,7 +128,7 @@ func (d sqlite3) setModelValue(value reflect.Value, field reflect.Value) error {
 			case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
 				t = time.Unix(int64(value.Elem().Uint()), 0)
 			case reflect.Slice:
-				t, err = time.Parse("2006-01-02 15:04:05", string(value.Elem().Bytes()))
+				t, err = time.Parse("2006-01-02 15:04:05.999999999-07:00", string(value.Elem().Bytes()))
 				if err != nil {
 					return err
 				}

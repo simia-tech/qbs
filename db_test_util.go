@@ -103,7 +103,7 @@ func doTestTransaction(assert *Assert) {
 func doTestSaveAndDelete(assert *Assert, mg *Migration, q *Qbs) {
 	defer closeMigrationAndQbs(mg, q)
 	x := time.Now()
-	assert.Equal(0, x.Sub(x.UTC()))
+	assert.Equal(time.Duration(0)*time.Second, x.Sub(x.UTC()))
 	now := time.Now()
 	type saveModel struct {
 		Id      int64
