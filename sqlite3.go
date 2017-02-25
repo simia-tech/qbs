@@ -158,15 +158,16 @@ func (d sqlite3) setModelValue(value reflect.Value, field reflect.Value) error {
 }
 
 func (d sqlite3) indexExists(mg *Migration, tableName string, indexName string) bool {
-	query := "PRAGMA index_list('" + tableName + "')"
+	query := "PRAGMA index_list('" + tableName + "');"
 	rows, err := mg.db.Query(query)
 	if err != nil {
 		panic(err)
 	}
 	defer rows.Close()
 	for rows.Next() {
-		var c0, c1, c2 string
-		rows.Scan(&c0, &c1, &c2)
+		var c1, c3 string
+		var c0, c2, c4 int
+		rows.Scan(&c0, &c1, &c2, &c3, &c4)
 		if c1 == indexName {
 			return true
 		}
